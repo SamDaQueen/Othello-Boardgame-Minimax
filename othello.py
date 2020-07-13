@@ -102,7 +102,8 @@ def captures_in_dir(board, row, row_delta, col, col_delta, white_turn):
     friendly_color = WHITE if white_turn else BLACK
     scan_row = row + 2*row_delta  # row of first scan position
     scan_col = col + 2*col_delta  # col of first scan position
-    while (scan_row >= 0) and (scan_row < NUM_COLUMNS) and (scan_col >= 0) and (scan_col < NUM_COLUMNS):
+    while (scan_row >= 0) and (scan_row < NUM_COLUMNS) \
+            and (scan_col >= 0) and (scan_col < NUM_COLUMNS):
         if board[scan_row][scan_col] == NOBODY:
             return False
         if board[scan_row][scan_col] == friendly_color:
@@ -176,7 +177,8 @@ def minimax_value(board, white_turn, search_depth, alpha, beta):
         for action in generate_legal_moves(board, True):
             print(white_turn, action)
             minimax = max(minimax, minimax_value(
-                play_move(board, action, True), False, search_depth - 1, alpha, beta))
+                play_move(board, action, True), False,
+                search_depth - 1, alpha, beta))
             if minimax >= beta:
                 return minimax
             alpha = max(minimax, alpha)
@@ -188,7 +190,8 @@ def minimax_value(board, white_turn, search_depth, alpha, beta):
         for action in generate_legal_moves(board, False):
             print(white_turn, action)
             minimax = min(minimax, minimax_value(
-                play_move(board, action, False), True, search_depth - 1, alpha, beta))
+                play_move(board, action, False), True,
+                search_depth - 1, alpha, beta))
             if minimax <= alpha:
                 return minimax
             beta = min(minimax, beta)
@@ -224,7 +227,8 @@ def play():
             for m in legal_moves:
                 new_board = play_move(board, m, True)
                 move_val = minimax_value(
-                    new_board, True, DEMO_SEARCH_DEPTH, float("-inf"), float("inf"))
+                    new_board, True, DEMO_SEARCH_DEPTH,
+                    float("-inf"), float("inf"))
                 if move_val > best_val:
                     best_move = m
                     best_val = move_val
@@ -279,7 +283,8 @@ def get_player_move(board, legal_moves):
     while True:
         # Bounce around this loop until a valid integer is received
         choice = input(
-            "Which move do you want to play? [0-" + str(len(legal_moves)-1) + "]")
+            "Which move do you want to play? [0-" +
+            str(len(legal_moves)-1) + "]")
         try:
             move_num = int(choice)
             if move_num >= 0 and move_num < len(legal_moves):
