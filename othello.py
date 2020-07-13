@@ -174,16 +174,24 @@ def minimax_value(board, white_turn, search_depth, alpha, beta):
         # print("white's turn")
         minimax = float("-inf")
         for action in generate_legal_moves(board, True):
+            print(white_turn, action)
             minimax = max(minimax, minimax_value(
-                play_move(board, action, True), False, search_depth - 1, 0, 0))
+                play_move(board, action, True), False, search_depth - 1, alpha, beta))
+            if minimax >= beta:
+                return minimax
+            alpha = max(minimax, alpha)
         return minimax
 
     if not white_turn:
         # print("black's turn")
         minimax = float("inf")
         for action in generate_legal_moves(board, False):
+            print(white_turn, action)
             minimax = min(minimax, minimax_value(
-                play_move(board, action, False), True, search_depth - 1, 0, 0))
+                play_move(board, action, False), True, search_depth - 1, alpha, beta))
+            if minimax <= alpha:
+                return minimax
+            beta = min(minimax, beta)
         return minimax
 
 # Printing a board (and return null), for interactive mode
