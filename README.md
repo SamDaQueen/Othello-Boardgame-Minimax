@@ -1,4 +1,5 @@
-<h2>Minimax AI with alpha-beta pruning for the board game Othello/Reversi.</h2>
+<h2>Minimax AI with alpha-beta pruning for the board game Othello/Reversi</h2>
+<h4>Created as part of course CS5100-Foundations of Artificial Intelligence at Northeastern University</h4>
 
 <div>
 <h3>How is the game played?</h3>
@@ -19,12 +20,18 @@
 
 <h4>Playing the Game</h4>
 
+<ol>
+ <li>Run 'othello.py. using the command 'python3 othello.py'</li>
+ <li>Type 'play' on the next line</li>
+</ol>
+<p>Rules:</p>
 <ul>
-<li>The AI goes first.</li>
-<li>You capture an opponent’s pieces when they lie in a straight line (in a row, column, or diagonal) between a piece you already had on the board and a piece you just played.</li>
-<li>You can only play a piece that would capture at least one piece. If you have no legal moves, the turn is passed.</li>
-<li>The game is over when neither player has any legal moves left. Whoever controls the most pieces on the board at that point wins.</li>
-<li>THe game can be over before the board is full.</li>
+ <li>The AI goes first.</li>
+ </li>At the user's turn, they are given a list of possible moves to select from</li>
+ <li>You capture an opponent’s pieces when they lie in a straight line (in a row, column, or diagonal) between a piece you already had on the board and a piece you just played.</li>
+ <li>You can only play a piece that would capture at least one piece. If you have no legal moves, the turn is passed.</li>
+ <li>The game is over when neither player has any legal moves left. Whoever controls the most pieces on the board at that point wins.</li>
+ <li>The game can be over before the board is full.</li>
 </ul>
 
 <h4>Minimax with alpha-beta pruning</h4>
