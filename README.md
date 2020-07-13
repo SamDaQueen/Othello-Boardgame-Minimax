@@ -1,4 +1,4 @@
-<h2>Minimax AI with Alpha-beta pruning for the board game Othello/Reversi.</h2>
+<h2>Minimax AI with alpha-beta pruning for the board game Othello/Reversi.</h2>
 
 <div>
 <h3>How is the game played?</h3>
@@ -27,7 +27,7 @@
 <li>THe game can be over before the board is full.</li>
 </ul>
 
-<h4>Minimax with Alpha-beta pruning</h4>
+<h4>Minimax with alpha-beta pruning</h4>
  
  <p>At each turn of the AI, it calculates the best possible move by using a minimax algorithm with predefined search depth. Larger the search depth, the more time it would
  take the AI to make its decision.</p>
