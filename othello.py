@@ -163,7 +163,7 @@ def check_game_over(board):
 
 
 def minimax_value(board, white_turn, search_depth, alpha, beta):
-    if search_depth == 0:
+    if search_depth == 0:  # terminal condition
         if check_game_over(board) == NOBODY:
             return np.count_nonzero(board == WHITE) \
                 - np.count_nonzero(board == BLACK)
@@ -172,29 +172,29 @@ def minimax_value(board, white_turn, search_depth, alpha, beta):
         return WIN_VAL if check_game_over(board) == WHITE else -WIN_VAL
 
     if white_turn:
-        # print("white's turn")
         minimax = float("-inf")
+        # check best value among all possible moves
         for action in generate_legal_moves(board, True):
-            print(white_turn, action)
+            # print(white_turn, action)
             minimax = max(minimax, minimax_value(
                 play_move(board, action, True), False,
                 search_depth - 1, alpha, beta))
-            if minimax >= beta:
+            if minimax >= beta:  # alpha-beta pruning condition
                 return minimax
-            alpha = max(minimax, alpha)
+            alpha = max(minimax, alpha)  # update alpha at max's turn
         return minimax
 
     if not white_turn:
-        # print("black's turn")
         minimax = float("inf")
+        # check best value among all possible moves
         for action in generate_legal_moves(board, False):
-            print(white_turn, action)
+            # print(white_turn, action)
             minimax = min(minimax, minimax_value(
                 play_move(board, action, False), True,
                 search_depth - 1, alpha, beta))
-            if minimax <= alpha:
+            if minimax <= alpha:  # alpha-beta pruning condition
                 return minimax
-            beta = min(minimax, beta)
+            beta = min(minimax, beta)  # update beta at min's turn
         return minimax
 
 # Printing a board (and return null), for interactive mode
