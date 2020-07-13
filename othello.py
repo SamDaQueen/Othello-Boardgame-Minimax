@@ -163,19 +163,25 @@ def check_game_over(board):
 
 
 def minimax_value(board, white_turn, search_depth, alpha, beta):
-    if search_depth == 0:  # terminal condition
-        if check_game_over(board) == NOBODY:
+
+    # check terminal condition - if board full or if search depth reached
+    if check_game_over(board) == TIE:
+        return 0
+    elif check_game_over(board) == WHITE:
+        return WIN_VAL
+    elif check_game_over(board) == BLACK:
+        return - WIN_VAL
+    else:
+        if search_depth == 0:  # terminal condition
             return np.count_nonzero(board == WHITE) \
                 - np.count_nonzero(board == BLACK)
-        if check_game_over(board) == TIE:
-            return 0
-        return WIN_VAL if check_game_over(board) == WHITE else -WIN_VAL
 
     if white_turn:
         minimax = float("-inf")
+        if not generate_legal_moves(board, True):  # skip turn
+            return minimax_value(board, False, search_depth, alpha, beta)
         # check best value among all possible moves
         for action in generate_legal_moves(board, True):
-            # print(white_turn, action)
             minimax = max(minimax, minimax_value(
                 play_move(board, action, True), False,
                 search_depth - 1, alpha, beta))
@@ -186,9 +192,10 @@ def minimax_value(board, white_turn, search_depth, alpha, beta):
 
     if not white_turn:
         minimax = float("inf")
+        if not generate_legal_moves(board, False):  # skip turn
+            return minimax_value(board, True, search_depth, alpha, beta)
         # check best value among all possible moves
         for action in generate_legal_moves(board, False):
-            # print(white_turn, action)
             minimax = min(minimax, minimax_value(
                 play_move(board, action, False), True,
                 search_depth - 1, alpha, beta))
@@ -311,6 +318,7 @@ else:
         search_depth = int(firstline)
     except ValueError:
         sys.exit("First line was neither 'play' nor a search depth; quitting...")
+    print("Calculating...")
     board = read_board()
     print(minimax_value(board, WHITE_TO_PLAY,
                         search_depth, float("-inf"), float("inf")))
