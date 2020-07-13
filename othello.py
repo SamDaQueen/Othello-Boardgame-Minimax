@@ -162,8 +162,29 @@ def check_game_over(board):
 
 
 def minimax_value(board, white_turn, search_depth, alpha, beta):
-    # TODO
-    return 0
+    if search_depth == 0:
+        if check_game_over(board) == NOBODY:
+            return np.count_nonzero(board == WHITE) \
+                - np.count_nonzero(board == BLACK)
+        if check_game_over(board) == TIE:
+            return 0
+        return WIN_VAL if check_game_over(board) == WHITE else -WIN_VAL
+
+    if white_turn:
+        # print("white's turn")
+        minimax = float("-inf")
+        for action in generate_legal_moves(board, True):
+            minimax = max(minimax, minimax_value(
+                play_move(board, action, True), False, search_depth - 1, 0, 0))
+        return minimax
+
+    if not white_turn:
+        # print("black's turn")
+        minimax = float("inf")
+        for action in generate_legal_moves(board, False):
+            minimax = min(minimax, minimax_value(
+                play_move(board, action, False), True, search_depth - 1, 0, 0))
+        return minimax
 
 # Printing a board (and return null), for interactive mode
 
