@@ -1,5 +1,6 @@
 import copy
 import sys
+import time
 
 import numpy as np
 
@@ -185,9 +186,9 @@ def minimax_value(board, white_turn, search_depth, alpha, beta):
             minimax = max(minimax, minimax_value(
                 play_move(board, action, True), False,
                 search_depth - 1, alpha, beta))
-            if minimax >= beta:  # alpha-beta pruning condition
-                return minimax
-            alpha = max(minimax, alpha)  # update alpha at max's turn
+            # if minimax >= beta:  # alpha-beta pruning condition
+            #     return minimax
+            # alpha = max(minimax, alpha)  # update alpha at max's turn
         return minimax
 
     if not white_turn:
@@ -199,9 +200,9 @@ def minimax_value(board, white_turn, search_depth, alpha, beta):
             minimax = min(minimax, minimax_value(
                 play_move(board, action, False), True,
                 search_depth - 1, alpha, beta))
-            if minimax <= alpha:  # alpha-beta pruning condition
-                return minimax
-            beta = min(minimax, beta)  # update beta at min's turn
+            # if minimax <= alpha:  # alpha-beta pruning condition
+            #     return minimax
+            # beta = min(minimax, beta)  # update beta at min's turn
         return minimax
 
 # Printing a board (and return null), for interactive mode
@@ -320,5 +321,7 @@ else:
         sys.exit("First line was neither 'play' nor a search depth; quitting...")
     print("Calculating...")
     board = read_board()
+    start = time.process_time()
     print(minimax_value(board, WHITE_TO_PLAY,
                         search_depth, float("-inf"), float("inf")))
+    print("Time taken:", time.process_time() - start)
