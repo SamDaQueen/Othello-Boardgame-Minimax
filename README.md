@@ -1,4 +1,4 @@
-<h2>Minimax AI with alpha-beta pruning for the board game Othello/Reversi</h2>
+# Minimax AI with alpha-beta pruning for the board game Othello/Reversi
 <h4>Created as part of course CS5100-Foundations of Artificial Intelligence at Northeastern University</h4>
 
 <div>
